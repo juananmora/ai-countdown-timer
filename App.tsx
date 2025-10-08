@@ -89,7 +89,7 @@ const App: React.FC = () => {
                 <div className="w-full max-w-3xl mx-auto glass-panel rounded-2xl p-8 md:p-12 border border-indigo-500/30 fade-in">
                     <div className="flex flex-col items-center gap-8 animate-fade-in">
                         <div className="flex items-center justify-center gap-10 flex-wrap">
-                            <img src="/bbva-logo.svg" alt="BBVA Logo" className="h-16 md:h-24 w-auto object-contain drop-shadow-lg" />
+                            <img src="logo-bbva.png" alt="BBVA Logo" className="h-16 md:h-24 w-auto object-contain drop-shadow-lg" />
                             <img src="https://belenos.me/media/2024-05-github-copilot-ai.webp" alt="Copilot Logo" className="h-16 md:h-24 w-auto object-contain drop-shadow-lg" />
                         </div>
                         <h1 className="text-3xl md:text-5xl font-orbitron neon-title text-center text-indigo-300">Creador de Cuentas Regresivas</h1>
@@ -139,7 +139,7 @@ const App: React.FC = () => {
     return (
         <main className="animated-grid-background enhanced-grid min-h-screen w-full flex flex-col items-center justify-center p-4 font-space text-white relative">
             <div className="flex items-center justify-center gap-10 flex-wrap mb-10 px-6">
-                <img src="/bbva-logo.svg" alt="BBVA Logo" className="h-20 md:h-28 w-auto object-contain drop-shadow-lg" />
+                <img src="logo-bbva.png" alt="BBVA Logo" className="h-20 md:h-28 w-auto object-contain drop-shadow-lg" />
                 <img src="https://belenos.me/media/2024-05-github-copilot-ai.webp" alt="Copilot Logo" className="h-20 md:h-28 w-auto object-contain drop-shadow-lg" />
             </div>
             <div className="text-center animate-fade-in flex flex-col items-center gap-10 md:gap-16">
