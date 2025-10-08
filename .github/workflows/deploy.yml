@@ -27,11 +27,16 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Clean npm environment
+        run: |
+          rm -rf node_modules package-lock.json || true
+          npm cache clean --force
         
       - name: Install dependencies
         run: npm install --registry https://registry.npmjs.org
+        
+      - name: Verify installation
+        run: npm ci --registry https://registry.npmjs.org
         
       - name: Build
         run: npm run build
