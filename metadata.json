@@ -1,0 +1,5 @@
+{
+  "name": "AI Countdown Timer",
+  "description": "A sleek and modern countdown timer application that suggests event titles using AI. Set any future date and time and watch the seconds tick down to your special event.",
+  "requestFramePermissions": []
+}
