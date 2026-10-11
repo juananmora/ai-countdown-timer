@@ -6,6 +6,8 @@
 
 Aplicación React + Vite para crear una cuenta regresiva hacia una fecha/hora futura. El título del evento lo escribes tú manualmente (se eliminó la generación con IA). Se muestran logos de BBVA y Copilot únicamente con fines visuales.
 
+Ahora la app arranca con un anuncio precargado para **"Anuncio sobre galgos"** el **12/10/2026 a las 10:00**; desde **"Crear Nueva Cuenta Regresiva"** puedes volver al formulario y configurarlo manualmente.
+
 ## Requisitos
 
 - Node.js (versión 18 o superior recomendada)
@@ -24,11 +26,12 @@ npm run dev
 Luego abre el navegador en la URL que muestre la consola (normalmente http://localhost:5173).
 
 ## Uso
-1. Selecciona una fecha y hora futura.
-2. Escribe el nombre de tu evento.
-3. Pulsa "Iniciar Cuenta Regresiva".
-4. Cuando termine el conteo, verás el mensaje de lanzamiento.
-5. Usa "Crear Nueva Cuenta Regresiva" para reiniciar.
+1. La aplicación muestra primero la cuenta regresiva precargada.
+2. Usa "Crear Nueva Cuenta Regresiva" si quieres definir otra fecha y otro evento.
+3. Selecciona una fecha y hora futura.
+4. Escribe el nombre de tu evento.
+5. Pulsa "Iniciar Cuenta Regresiva".
+6. Cuando termine el conteo, verás el mensaje de lanzamiento.
 
 ## Desplegar en GitHub Pages
 

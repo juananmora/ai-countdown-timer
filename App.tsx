@@ -3,18 +3,19 @@ import { useCountdown } from './hooks/useCountdown';
 import TimeUnit from './components/TimeUnit';
 
 const COPILOT_LOGO = `data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjhGOEZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMS4yMyAxMC4yIj48cGF0aCBkPSJNOS4xMywzLjQxYy0uMTQtLjE0LS4zMS0uMjEtLjQ4LS4yMXMtLjM1LC4wNy0uNDksLjIxTDYuMDIsNS41NSw0LjM0LDMuODdjLS4xNC0uMTQtLjMyLS4yMS0uNS0uMjFzLS4zNiwwLS41LC4yMUMzLjIyLDMuODQsMywxMSw0LjQ3LDMuMTZDNy41MSw0LjQ4LDYuMDIsNy41Miw2LjAyLDcuNTJsMS41NS0xLjU1LDAsMCwxLjU2LTEuNTYsMCwwYzAtLjE0LTMuMTYsMy4xNC00LjQ4LDQuNDcsMS4zMiwxLjMyLDQuNDgsMy4xNCw0LjQ4LDMuMTRzMy4xNi0zLjE0LDQuNDctNC40OEM5LjE0LDkuMTIsOS4xMywzLjQxLDkuMTMsMy40MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0uNDQgLTEuMzQpIi8+PHBhdGggZD0iTTEwLjI2LDEuNDRjLS4xNC0uMTQtLjMyLS4yMi0uNS0uMjJoMEM4LjQ1LDAsMi4xMSw2LjM0LDIuMTEsNi4zNFYxLjY2YzAtLjE1LS4wNy0uMi4yMS0uMzNDMi4yNCwxLjI5LDIuMjEsMS4yNSwyLjE4LDEuMjFjLS4xNC0uMTQtLjMyLS4yMS0uNS0uMjFTMS4zMywxLjA3LDEuMTgsMS4yMUMuMzcsMiwwLC43LDAsLjdWOS41YzAsLjE1LDUuNjQsNS42NCw1LjY0LDUuNjRzNS42NC01LjY0LDUuNjQtNS42NEw1LjY0LDUuNjQsMTAuMjYsMS40NFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0uNDQgLTEuMzQpIi8+PC9zdmc+`;
-
+const DEFAULT_EVENT_NAME = 'Anuncio sobre galgos';
+const DEFAULT_DATE_STRING = '2026-10-12T10:00';
 
 const App: React.FC = () => {
+    const defaultTargetDate = useMemo(() => new Date(DEFAULT_DATE_STRING), []);
+
     // State management
-    const [targetDate, setTargetDate] = useState<Date | null>(null);
-    const [eventName, setEventName] = useState<string>('');
-    const [isCountingDown, setIsCountingDown] = useState<boolean>(false);
+    const [targetDate, setTargetDate] = useState<Date | null>(defaultTargetDate);
+    const [eventName, setEventName] = useState<string>(DEFAULT_EVENT_NAME);
+    const [isCountingDown, setIsCountingDown] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
-    const [dateString, setDateString] = useState<string>('');
+    const [dateString, setDateString] = useState<string>(DEFAULT_DATE_STRING);
     // Eliminado isGenerating/generación por IA
-
-
 
     // Custom hook for countdown logic
     const timeLeft = useCountdown(isCountingDown ? targetDate : null);
@@ -38,9 +39,9 @@ const App: React.FC = () => {
             }
         }
     };
-    
+
     // Se eliminó la función handleSuggestTitle porque ya no usamos IA
-    
+
     const handleStartCountdown = () => {
         if (!dateString) {
             setError('Por favor, selecciona una fecha y hora.');
@@ -55,7 +56,7 @@ const App: React.FC = () => {
             setError('Por favor, introduce un nombre para el evento.');
             return;
         }
-        
+
         setError('');
         setTargetDate(selectedDate);
         setIsCountingDown(true);
@@ -94,7 +95,7 @@ const App: React.FC = () => {
                         </div>
                         <h1 className="text-3xl md:text-5xl font-orbitron neon-title text-center text-indigo-300">Creador de Cuentas Regresivas</h1>
                         <p className="text-center text-slate-400">Establece una fecha futura para tu evento épico.</p>
-                        
+
                         <div className="space-y-4">
                             <div>
                                 <label htmlFor="datetime-picker" className="block text-sm font-medium text-slate-300 mb-2">Fecha y Hora del Evento</label>
@@ -134,7 +135,7 @@ const App: React.FC = () => {
             </main>
         );
     }
-    
+
     // Countdown View
     return (
         <main className="animated-grid-background enhanced-grid min-h-screen w-full flex flex-col items-center justify-center p-4 font-space text-white relative">
@@ -147,7 +148,7 @@ const App: React.FC = () => {
                     <h2 className="text-4xl sm:text-5xl md:text-7xl font-orbitron neon-title text-indigo-300 break-words px-4 uppercase tracking-widest">{eventName}</h2>
                     {targetDate && <p className="text-slate-400 mt-4 text-base md:text-xl font-mono">{formatDateTime(targetDate)}</p>}
                 </div>
-                
+
                 {isFinished ? (
                     <div className="text-6xl md:text-9xl font-bold text-green-400 my-10 animate-pulse">
                         ¡LANZADO!
@@ -163,7 +164,7 @@ const App: React.FC = () => {
                     )
                 )}
             </div>
-            
+
             <button
                 onClick={handleReset}
                 className="absolute bottom-8 md:bottom-12 bg-slate-800/80 hover:bg-slate-700/90 border border-slate-700 text-slate-300 hover:text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-500/50"
