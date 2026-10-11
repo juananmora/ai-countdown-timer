@@ -1,9 +1,12 @@
-
 import { useState, useEffect } from 'react';
-import { TimeLeft } from '../types';
+import type { TimeLeft } from '../types';
 
-const calculateTimeLeft = (targetDate: Date | null): TimeLeft | null => {
+export const calculateTimeLeft = (targetDate: Date | null): TimeLeft | null => {
   if (!targetDate) return null;
+
+  if (Number.isNaN(targetDate.getTime())) {
+    throw new RangeError('Invalid target date');
+  }
 
   const difference = +targetDate - +new Date();
   let timeLeft: TimeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -28,8 +31,7 @@ export const useCountdown = (targetDate: Date | null) => {
       setTimeLeft(null);
       return;
     }
-    
-    // Set initial value immediately
+
     setTimeLeft(calculateTimeLeft(targetDate));
 
     const timer = setInterval(() => {
