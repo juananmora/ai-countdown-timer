@@ -21,7 +21,9 @@ const loadCountdownModule = async () => {
   await fs.mkdir(outputDir, { recursive: true });
   await fs.writeFile(outputPath, outputText);
 
-  return import(`${pathToFileURL(outputPath).href}?t=${Date.now()}`);
+  const countdownModule = await import(`${pathToFileURL(outputPath).href}?t=${Date.now()}`);
+  await fs.rm(outputDir, { recursive: true, force: true });
+  return countdownModule;
 };
 
 const { calculateTimeLeft } = await loadCountdownModule();
