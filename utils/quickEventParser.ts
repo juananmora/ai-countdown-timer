@@ -79,11 +79,11 @@ const resolveBaseDate = (normalizedPrompt: string, now: Date) => {
   if (normalizedPrompt.includes('manana')) {
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
-    return tomorrow;
+    return { date: tomorrow, kind: 'tomorrow' as const };
   }
 
   if (normalizedPrompt.includes('hoy')) {
-    return new Date(now);
+    return { date: new Date(now), kind: 'today' as const };
   }
 
   const weekday = Object.keys(WEEKDAY_INDEX).find((day) => normalizedPrompt.includes(day));
@@ -95,7 +95,7 @@ const resolveBaseDate = (normalizedPrompt: string, now: Date) => {
   const targetWeekday = WEEKDAY_INDEX[weekday];
   const daysAhead = (targetWeekday - now.getDay() + 7) % 7;
   candidate.setDate(now.getDate() + daysAhead);
-  return candidate;
+  return { date: candidate, kind: 'weekday' as const };
 };
 
 export const parseQuickEventPrompt = (prompt: string, now = new Date()): QuickEventParseResult | { error: string } => {
@@ -110,16 +110,15 @@ export const parseQuickEventPrompt = (prompt: string, now = new Date()): QuickEv
     return { error: 'No pude identificar la hora. Usa un formato como "a las 10 am" o "a las 18:30".' };
   }
 
-  const baseDate = resolveBaseDate(normalizedPrompt, now);
-  if (!baseDate) {
+  const baseDateResult = resolveBaseDate(normalizedPrompt, now);
+  if (!baseDateResult) {
     return { error: 'No pude identificar el día. Prueba con "hoy", "mañana" o un día de la semana.' };
   }
 
-  const targetDate = new Date(baseDate);
+  const targetDate = new Date(baseDateResult.date);
   targetDate.setHours(time.hours, time.minutes, 0, 0);
 
-  const mentionsExplicitDay = normalizedPrompt.includes('hoy') || normalizedPrompt.includes('manana') || Object.keys(WEEKDAY_INDEX).some((day) => normalizedPrompt.includes(day));
-  if (mentionsExplicitDay && targetDate <= now && !normalizedPrompt.includes('manana')) {
+  if (baseDateResult.kind === 'weekday' && targetDate <= now) {
     targetDate.setDate(targetDate.getDate() + 7);
   }
 
