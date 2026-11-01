@@ -4,6 +4,8 @@
 
 # Cuenta Regresiva
 
+**Fecha de revisión:** 1 de noviembre de 2026
+
 Aplicación React + Vite para crear una cuenta regresiva hacia una fecha/hora futura. El título del evento lo escribes tú manualmente (se eliminó la generación con IA). Se muestran logos de BBVA y Copilot únicamente con fines visuales.
 
 ## Requisitos
