@@ -6,6 +6,20 @@
 
 Aplicación React + Vite para crear una cuenta regresiva hacia una fecha/hora futura. El título del evento lo escribes tú manualmente (se eliminó la generación con IA). Se muestran logos de BBVA y Copilot únicamente con fines visuales.
 
+## Revisión — 1 de noviembre de 2026
+
+### Flujo y orquestación de la aplicación
+
+1. `index.html` proporciona el elemento `root`; `index.tsx` monta `App` dentro de React Strict Mode.
+2. `App.tsx` muestra el formulario inicial. El usuario elige una fecha futura y escribe el nombre del evento. La aplicación valida ambos datos antes de iniciar; si falta alguno o la fecha ya pasó, muestra un error y no empieza la cuenta atrás.
+3. Al iniciar, `App` guarda la fecha objetivo y activa el modo de cuenta atrás. El hook `hooks/useCountdown.ts` calcula el tiempo restante y lo actualiza cada segundo; al cambiar o desactivar la fecha, limpia el intervalo anterior.
+4. `App` presenta días, horas, minutos y segundos mediante `components/TimeUnit.tsx`. Cuando el tiempo llega a cero, muestra «¡LANZADO!». El botón para crear otra cuenta atrás limpia los datos y vuelve al formulario.
+5. Vite ejecuta la aplicación en desarrollo (`npm run dev`) o genera los recursos estáticos de producción (`npm run build`, en `dist/`). No hay un servidor propio ni un flujo de orquestación de servicios Relay en esta aplicación.
+
+### Alcance de la factoría Relay
+
+En este repositorio no aparecen una factoría Relay, su orquestador, agentes, colas, configuración ni documentación de sus fases. Por tanto, no es posible describir de forma fiable «todo el proceso» de esa factoría a partir de este código. Lo único relacionado con servicios que existe es `services/geminiService.ts`, pero `App.tsx` no lo importa ni lo utiliza; la generación de títulos por IA no forma parte del flujo activo. Para documentar Relay con sus pasos y responsabilidades reales hace falta el repositorio o la especificación de esa factoría.
+
 ## Requisitos
 
 - Node.js (versión 18 o superior recomendada)
