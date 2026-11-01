@@ -15,7 +15,8 @@ La interfaz está en español y tiene un diseño adaptable con fondo animado, ti
 ## Estructura principal
 
 - `App.tsx`: formulario de configuración, validación de fecha y nombre del evento, y vista de la cuenta atrás.
-- `hooks/useCountdown.ts`: cálculo y actualización del tiempo restante cada segundo.
+- `hooks/useCountdown.ts`: hook que actualiza el tiempo restante cada segundo.
+- `hooks/countdown.ts`: cálculo del tiempo restante hasta una fecha.
 - `components/TimeUnit.tsx`: presentación de cada unidad temporal.
 - `types.ts`: tipo de datos del tiempo restante.
 - `styles.css` e `index.html`: estilos y recursos visuales de la página.
