@@ -33,3 +33,12 @@ test('returns zero for the exact target and an elapsed target', () => {
 test('returns null when no target date is configured', () => {
   assert.equal(calculateTimeLeft(null, new Date('2026-01-01T00:00:00.000Z')), null);
 });
+
+test('rejects invalid dates', () => {
+  const invalidDate = new Date(Number.NaN);
+
+  assert.throws(
+    () => calculateTimeLeft(invalidDate, new Date('2026-01-01T00:00:00.000Z')),
+    { name: 'RangeError', message: 'Target date and current time must be valid dates.' },
+  );
+});
